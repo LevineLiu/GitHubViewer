@@ -15,11 +15,17 @@ import javax.inject.Inject;
  */
 
 public class HomeFragmentInteractor {
+    private Context mContext;
 
     @Inject
-    public FragmentPagerItems getPagerFragments(Context context){
-        String[] title = context.getResources().getStringArray(R.array.home_title_array);
-        return FragmentPagerItems.with(context)
+    public HomeFragmentInteractor(Context context){
+        mContext = context;
+    }
+
+    @Inject
+    public FragmentPagerItems getPagerFragments(){
+        String[] title = mContext.getResources().getStringArray(R.array.home_title_array);
+        return FragmentPagerItems.with(mContext)
                 .add(title[0], CommonRepositoriesListFragment.class)
                 .add(title[1], CommonRepositoriesListFragment.class)
                 .create();

@@ -76,6 +76,7 @@ public abstract class BaseFragment extends Fragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         mScreenWidth = displayMetrics.widthPixels;
         mScreenHeight = displayMetrics.heightPixels;
+        setupComponent((BaseAppCompatActivity) mContext);
         initView();
         return mConvertView;
     }
@@ -139,6 +140,10 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initView();
 
+
+    protected abstract void setupComponent(BaseAppCompatActivity activity);
+
+
     protected void addFragmentWithAnimations(int containerId, Fragment fragment){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -147,6 +152,7 @@ public abstract class BaseFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
+
     /*************************** start navigate *********************************/
 
 

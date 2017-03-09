@@ -23,10 +23,7 @@ public class MainActivity extends BaseAppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    return true;
-                case R.id.navigation_dashboard:
-                    return true;
-                case R.id.navigation_notifications:
+                    mFragmentSwitcher.switchFragment(0);
                     return true;
             }
             return false;

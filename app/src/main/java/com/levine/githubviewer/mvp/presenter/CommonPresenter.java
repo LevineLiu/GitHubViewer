@@ -10,8 +10,8 @@ import io.reactivex.disposables.Disposable;
  * @author LLW
  */
 public abstract class CommonPresenter<V extends IBaseView> {
-    public V mView;
-    public Disposable mDisposable;
+    protected V mView;
+    protected Disposable mDisposable;
 
     public abstract void initialize();
 

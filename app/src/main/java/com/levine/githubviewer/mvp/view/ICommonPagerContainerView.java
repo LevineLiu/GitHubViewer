@@ -7,7 +7,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
  *
  * @author LLW
  */
-public interface ICommonPagerContainerView {
+public interface ICommonPagerContainerView extends IBaseView{
 
     void initPagerView(FragmentPagerItems fragmentPagerItems);
 

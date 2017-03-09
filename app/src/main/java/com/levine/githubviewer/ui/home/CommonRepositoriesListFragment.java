@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.levine.githubviewer.R;
+import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
 
 import butterknife.BindView;
@@ -22,6 +23,11 @@ public class CommonRepositoriesListFragment extends BaseFragment{
     @Override
     protected int getLayoutId() {
         return R.layout.swipe_refresh_layout;
+    }
+
+    @Override
+    protected void setupComponent(BaseAppCompatActivity activity) {
+        activity.getActivityComponent().inject(this);
     }
 
     @Override
