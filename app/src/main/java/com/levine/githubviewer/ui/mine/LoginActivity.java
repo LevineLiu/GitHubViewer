@@ -1,4 +1,4 @@
-package com.levine.githubviewer.ui.activity;
+package com.levine.githubviewer.ui.mine;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

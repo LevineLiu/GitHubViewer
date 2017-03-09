@@ -6,6 +6,34 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme.Light" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="primaryTextColor">@color/colorTextColor</item>
+        <item name="secondaryTextColor">#96F4F4F6</item>
+        <item name="backgroundCardColor">@color/colorCardViewBackground</item>
+        <item name="dividerColor">#F2F2F3</item>
+        <item name="backgroundColor">@color/colorBackground</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+    </style>
+    <style name="AppTheme.Dark" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimaryNightMode</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNightMode</item>
+        <item name="primaryTextColor">@color/colorTextColorDark</item>
+        <item name="secondaryTextColor">#8033343B</item>
+        <item name="backgroundCardColor">@color/colorCardViewBackgroundDark</item>
+        <item name="dividerColor">#F2F2F3</item>
+        <item name="backgroundColor">@color/colorBackgroundDark</item>
+        <item name="android:windowBackground">@color/colorBackgroundDark</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>
