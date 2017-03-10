@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 
 import com.levine.githubviewer.GitHubViewerApplication;
 import com.levine.githubviewer.api.GitHubApi;
+import com.levine.githubviewer.api.GitHubTrendingApi;
 import com.levine.githubviewer.injector.module.AppModule;
 import com.levine.githubviewer.injector.module.GitHubApiModule;
 
@@ -20,6 +21,7 @@ import dagger.Component;
 @Component(modules = {GitHubApiModule.class, AppModule.class})
 public interface AppComponent {
     GitHubApi getGitHubAPi();
+    GitHubTrendingApi getTrendingApi();
     GitHubViewerApplication getApplication();
     SharedPreferences getSharedPreferences();
 }

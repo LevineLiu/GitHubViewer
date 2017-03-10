@@ -4,4 +4,9 @@
         <item>Android</item>
         <item>iOS</item>
     </array>
+    <array name="trending_array">
+        <item>daily</item>
+        <item>weekly</item>
+        <item>monthly</item>
+    </array>
 </resources>

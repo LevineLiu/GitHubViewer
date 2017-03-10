@@ -5,8 +5,10 @@ import android.content.Context;
 import com.levine.githubviewer.injector.ActivityScope;
 import com.levine.githubviewer.injector.module.ActivityModule;
 import com.levine.githubviewer.ui.MainActivity;
-import com.levine.githubviewer.ui.home.CommonRepositoriesListFragment;
+import com.levine.githubviewer.ui.home.RepositoriesListFragment;
 import com.levine.githubviewer.ui.home.HomeFragment;
+import com.levine.githubviewer.ui.trending.TrendingFragment;
+import com.levine.githubviewer.ui.trending.TrendingListFragment;
 
 import dagger.Component;
 
@@ -21,5 +23,7 @@ public interface ActivityComponent {
     Context getContext();
     void inject(MainActivity activity);
     void inject(HomeFragment fragment);
-    void inject(CommonRepositoriesListFragment fragment);
+    void inject(RepositoriesListFragment fragment);
+    void inject(TrendingListFragment fragment);
+    void inject(TrendingFragment fragment);
 }

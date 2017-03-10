@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable;
  *
  * @author LLW
  */
-public abstract class CommonPresenter<V extends IBaseView> {
+public abstract class BasePresenter<V extends IBaseView> {
     protected V mView;
     protected Disposable mDisposable;
 

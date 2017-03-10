@@ -1,21 +1,21 @@
 package com.levine.githubviewer.mvp.presenter;
 
-import com.levine.githubviewer.mvp.interactor.HomeFragmentInteractor;
+import com.levine.githubviewer.mvp.interactor.TrendingInteractor;
 import com.levine.githubviewer.mvp.view.ICommonPagerContainerView;
 
 import javax.inject.Inject;
 
 /**
- * Created on 2017/3/9
+ * Created on 2017/3/10
  *
  * @author Levine
  */
 
-public class HomePresenter extends BasePresenter<ICommonPagerContainerView> {
-    private HomeFragmentInteractor mInteractor;
+public class TrendingPresenter extends BasePresenter<ICommonPagerContainerView>{
+    private TrendingInteractor mInteractor;
 
     @Inject
-    public HomePresenter(HomeFragmentInteractor interactor){
+    public TrendingPresenter(TrendingInteractor interactor){
         mInteractor = interactor;
     }
 

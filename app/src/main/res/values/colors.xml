@@ -13,4 +13,5 @@
     <color name="colorBanner">#4a4a4a</color>
     <color name="colorPrimaryNightMode">#222222</color>
     <color name="colorPrimaryDarkNightMode">@android:color/black</color>
+    <color name="secondaryTextColor">#96F4F4F6</color>
 </resources>

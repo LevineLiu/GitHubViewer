@@ -11,9 +11,13 @@ import android.widget.TextView;
 import com.levine.githubviewer.R;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.home.HomeFragment;
+import com.levine.githubviewer.ui.trending.TrendingFragment;
 import com.levine.githubviewer.util.FragmentSwitcher;
 
 public class MainActivity extends BaseAppCompatActivity {
+    private final static int TAB_HOME = 0;
+    private final static int TAB_TRENDING = 1;
+    private final static int TAB_MINE = 2;
 
     private FragmentSwitcher mFragmentSwitcher;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -23,8 +27,16 @@ public class MainActivity extends BaseAppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mFragmentSwitcher.switchFragment(0);
+                    mFragmentSwitcher.switchFragment(TAB_HOME);
                     return true;
+                case R.id.navigation_trending:
+                    mFragmentSwitcher.switchFragment(TAB_TRENDING);
+                    return true;
+//                case R.id.navigation_mine:
+//                    mFragmentSwitcher.switchFragment(TAB_MINE);
+//                    return true;
+
+
             }
             return false;
         }
@@ -48,7 +60,9 @@ public class MainActivity extends BaseAppCompatActivity {
         if(getSupportActionBar() != null)
             getSupportActionBar().setTitle("");
         mFragmentSwitcher = new FragmentSwitcher(this, R.id.content);
-        mFragmentSwitcher.addFragment(0, new HomeFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
+        mFragmentSwitcher.addFragment(TAB_HOME, new HomeFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
+        mFragmentSwitcher.addFragment(TAB_TRENDING, new TrendingFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
+        mFragmentSwitcher.switchFragment(TAB_HOME);
     }
 
     @Override

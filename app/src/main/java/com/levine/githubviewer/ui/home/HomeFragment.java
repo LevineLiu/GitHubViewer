@@ -22,14 +22,13 @@ import butterknife.BindView;
  */
 
 public class HomeFragment extends BaseFragment implements ICommonPagerContainerView{
-
-    @BindView(R.id.stl_fragment_home) SmartTabLayout mSmartTabLayout;
-    @BindView(R.id.vp_fragment_home) ViewPager mViewPager;
+    @BindView(R.id.stl_tab_layout) SmartTabLayout mSmartTabLayout;
+    @BindView(R.id.vp_tab_layout) ViewPager mViewPager;
     @Inject HomePresenter mPresenter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_tab_layout;
     }
 
     @Override
@@ -50,5 +49,6 @@ public class HomeFragment extends BaseFragment implements ICommonPagerContainerV
         mSmartTabLayout.setDistributeEvenly(true);
         mSmartTabLayout.setCustomTabView(R.layout.custom_tab_view, R.id.tv_tab_title);
         mSmartTabLayout.setViewPager(mViewPager);
+
     }
 }

@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner    "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "SERVER", '"https://api.github.com/"'
+        buildConfigField "String", "TRENDING_SERVER", '"http://trending.codehub-app.com/v2/"'
     }
     buildTypes {
         release {

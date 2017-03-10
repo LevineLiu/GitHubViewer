@@ -7,12 +7,12 @@
         android:title="@string/title_home"/>
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_trending"
         android:icon="@drawable/ic_trending_black_24dp"
         android:title="@string/title_trending"/>
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_mine"
         android:icon="@drawable/ic_mine_black_24dp"
         android:title="@string/title_mine"/>
 

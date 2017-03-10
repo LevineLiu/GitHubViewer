@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.levine.githubviewer.BuildConfig;
 import com.levine.githubviewer.GitHubViewerApplication;
 import com.levine.githubviewer.api.GitHubApi;
+import com.levine.githubviewer.api.GitHubTrendingApi;
 import com.levine.githubviewer.util.NetUtils;
 
 import java.io.File;
@@ -72,7 +73,7 @@ public class GitHubApiModule {
 
     @Singleton
     @Provides
-    public GitHubApi provideZhiHuDailyApi(OkHttpClient client) {
+    public GitHubApi provideGitHubViewerApi(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(BuildConfig.SERVER)
@@ -80,5 +81,17 @@ public class GitHubApiModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(GitHubApi.class);
+    }
+
+    @Singleton
+    @Provides
+    public GitHubTrendingApi provideTrendingApi(OkHttpClient client){
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(BuildConfig.TRENDING_SERVER)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(GitHubTrendingApi.class);
     }
 }
