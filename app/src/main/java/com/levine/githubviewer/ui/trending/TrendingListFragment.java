@@ -48,6 +48,7 @@ public class TrendingListFragment extends BaseFragment implements SwipeRefreshLa
     protected void initView() {
         mTimeSpan = getArguments().getString(TIME_SPAN);
         mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setColorSchemeColors(mContext.getResources().getColor(R.color.colorPrimary));
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mAdapter = new RepositoriesListAdapter(mContext, layoutManager);
         mRecyclerView.addOnScrollListener(mAdapter.getOnScrollListener());

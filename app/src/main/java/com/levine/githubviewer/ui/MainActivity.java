@@ -3,6 +3,7 @@ package com.levine.githubviewer.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.levine.githubviewer.R;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.home.HomeFragment;
+import com.levine.githubviewer.ui.mine.MineFragment;
 import com.levine.githubviewer.ui.trending.TrendingFragment;
 import com.levine.githubviewer.util.FragmentSwitcher;
 
@@ -32,9 +34,9 @@ public class MainActivity extends BaseAppCompatActivity {
                 case R.id.navigation_trending:
                     mFragmentSwitcher.switchFragment(TAB_TRENDING);
                     return true;
-//                case R.id.navigation_mine:
-//                    mFragmentSwitcher.switchFragment(TAB_MINE);
-//                    return true;
+                case R.id.navigation_mine:
+                    mFragmentSwitcher.switchFragment(TAB_MINE);
+                    return true;
 
 
             }
@@ -60,9 +62,9 @@ public class MainActivity extends BaseAppCompatActivity {
         if(getSupportActionBar() != null)
             getSupportActionBar().setTitle("");
         mFragmentSwitcher = new FragmentSwitcher(this, R.id.content);
-        mFragmentSwitcher.addFragment(TAB_HOME, new HomeFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
         mFragmentSwitcher.addFragment(TAB_TRENDING, new TrendingFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
-        mFragmentSwitcher.switchFragment(TAB_HOME);
+        mFragmentSwitcher.addFragment(TAB_HOME, new HomeFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
+        mFragmentSwitcher.addFragment(TAB_MINE, new MineFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
     }
 
     @Override

@@ -22,16 +22,16 @@ import butterknife.BindView;
  */
 
 public class TrendingFragment extends BaseFragment implements ICommonPagerContainerView{
-    @BindView(R.id.stl_tab_layout)
+    @BindView(R.id.stl_fragment_trending)
     SmartTabLayout mSmartTabLayout;
-    @BindView(R.id.vp_tab_layout)
+    @BindView(R.id.vp_fragment_trending)
     ViewPager mViewPager;
     @Inject
     TrendingPresenter mPresenter;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_tab_layout;
+        return R.layout.fragment_trending;
     }
 
     @Override
@@ -49,6 +49,7 @@ public class TrendingFragment extends BaseFragment implements ICommonPagerContai
     public void initPagerView(FragmentPagerItems fragmentPagerItems) {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), fragmentPagerItems);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(fragmentPagerItems.size());
         mSmartTabLayout.setDistributeEvenly(true);
         mSmartTabLayout.setCustomTabView(R.layout.custom_tab_view, R.id.tv_tab_title);
         mSmartTabLayout.setViewPager(mViewPager);

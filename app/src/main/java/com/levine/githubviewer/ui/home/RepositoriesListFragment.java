@@ -51,8 +51,10 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
 
     @Override
     protected void initView() {
-        mKeyword = getArguments().getString(EXTRA_KEYWORD);
+        if(getArguments() != null)
+            mKeyword = getArguments().getString(EXTRA_KEYWORD);
         mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setColorSchemeColors(mContext.getResources().getColor(R.color.colorPrimary));
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mAdapter = new RepositoriesListAdapter(mContext, layoutManager);
         mAdapter.setOnLoadMoreListener(this);
