@@ -7,6 +7,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login">Sign in</string>
 
+    <string name="my_favorite">My favorite</string>
+    <string name="night_mode">Night mode</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

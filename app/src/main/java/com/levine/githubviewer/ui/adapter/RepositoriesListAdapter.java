@@ -1,6 +1,7 @@
 package com.levine.githubviewer.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -38,5 +39,19 @@ public class RepositoriesListAdapter extends BaseRecyclerViewLoadMoreAdapter<Rep
         language.setText(entity.getLanguage());
         start.setText(String.valueOf(entity.getStargazers_count()));
         fork.setText(String.valueOf(entity.getForks_count()));
+
+        int color;
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            viewHolder.itemView.setBackgroundResource(R.color.colorCardViewBackgroundDark);
+            color = mContext.getResources().getColor(R.color.colorTextColorDark);
+        }else{
+            viewHolder.itemView.setBackgroundResource(R.color.colorCardViewBackground);
+            color = mContext.getResources().getColor(R.color.colorTextColor);
+        }
+        repositoriesName.setTextColor(color);
+        description.setTextColor(color);
+        language.setTextColor(color);
+        start.setTextColor(color);
+        fork.setTextColor(color);
     }
 }

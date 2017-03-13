@@ -19,10 +19,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import com.levine.githubviewer.R;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
@@ -46,7 +48,7 @@ public abstract class BaseFragment extends Fragment {
     protected int mScreenHeight;
     protected Context mContext;
     private Unbinder mUnbinder;
-    private View mConvertView;
+    protected View mConvertView;
 
     @Override
     public void onAttach(Context context) {
@@ -213,67 +215,78 @@ public abstract class BaseFragment extends Fragment {
 
     /*************************** end handler *********************************/
 
-//    /**
-//     * 设置日夜间模式
-//     */
-//    public void setDayNightMode(){
-//        if(getView() == null)
-//            return;
-//        TypedValue background = new TypedValue();
-//        TypedValue textColor = new TypedValue();
-//        TypedValue cardBackground = new TypedValue();
-//        TypedValue colorPrimary = new TypedValue();
-//        Resources.Theme theme = mContext.getTheme();
-//        theme.resolveAttribute(R.attr.backgroundColor, background, true);
-//        theme.resolveAttribute(R.attr.primaryTextColor, textColor, true);
-//        theme.resolveAttribute(R.attr.backgroundCardColor, cardBackground, true);
-//        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true);
-//
-//        mConvertView.setBackgroundResource(background.resourceId);
-//        SwipeRefreshLayout refreshLayout = ButterKnife.findById(mConvertView, R.id.srl_content_common_list);
-//        RecyclerView recyclerView = ButterKnife.findById(mConvertView, R.id.rv_content_common_list);
-//        refreshLayout.setColorScheme(colorPrimary.resourceId);
-//        updateRecyclerView(recyclerView, background, cardBackground, textColor);
-//
-//    }
-//
-//    private void updateRecyclerView(RecyclerView recyclerView, TypedValue background,
-//                                    TypedValue cardBackground, TypedValue textColor){
-//        for(int i=0; i<recyclerView.getChildCount(); i++){
-//            ViewGroup childView = (ViewGroup) recyclerView.getChildAt(i);
-//            if(childView instanceof CardView){
-//                childView.setBackgroundResource(cardBackground.resourceId);
-//                TextView textView = ButterKnife.findById(childView, R.id.tv_item_news_title);
-//                textView.setTextColor(getResources().getColor(textColor.resourceId));
-//            }
-//            else
-//                childView.setBackgroundResource(background.resourceId);
-//        }
-//
-//        //清空RecyclerView 缓存的Item，即清空Recycler里的mAttachedScrap(屏幕里的缓存)、
-//        // mCachedViews(屏幕外的缓存)以及RecycledViewPool的缓存
-//        //那么，如果是ListView，要怎么做呢？这里的思路是通过反射拿到 AbsListView 类中的 RecycleBin 对象，然后同样再用反射去调用 clear 方法
-//        Class<RecyclerView> recyclerViewClass = RecyclerView.class;
-//        try {
-//            Field declaredField = recyclerViewClass.getDeclaredField("mRecycler");
-//            declaredField.setAccessible(true);
-//            Method declaredMethod = Class.forName(RecyclerView.Recycler.class.getName()).getDeclaredMethod("clear", (Class<?>[]) new Class[0]);
-//            declaredMethod.setAccessible(true);
-//            declaredMethod.invoke(declaredField.get(recyclerView), new Object[0]);
-//            RecyclerView.RecycledViewPool recycledViewPool = recyclerView.getRecycledViewPool();
-//            recycledViewPool.clear();
-//
-//        } catch (NoSuchFieldException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+
+    /**
+     * 设置主页列表日夜间模式
+     */
+    public void setDayNightMode(){
+        if(getView() == null)
+            return;
+        TypedValue background = new TypedValue();
+        TypedValue textColor = new TypedValue();
+        TypedValue cardBackground = new TypedValue();
+        TypedValue colorPrimary = new TypedValue();
+        Resources.Theme theme = mContext.getTheme();
+        theme.resolveAttribute(R.attr.backgroundColor, background, true);
+        theme.resolveAttribute(R.attr.primaryTextColor, textColor, true);
+        theme.resolveAttribute(R.attr.backgroundCardColor, cardBackground, true);
+        theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true);
+
+        mConvertView.setBackgroundResource(background.resourceId);
+        SwipeRefreshLayout refreshLayout = ButterKnife.findById(mConvertView, R.id.srl_content_common_list);
+        RecyclerView recyclerView = ButterKnife.findById(mConvertView, R.id.rv_content_common_list);
+        refreshLayout.setColorScheme(colorPrimary.resourceId);
+        recyclerView.setBackgroundResource(background.resourceId);
+        updateRecyclerView(recyclerView, cardBackground, textColor);
+
+    }
+
+    /**
+     * 切换日夜间模式时更新RecyclerView
+     */
+    protected void updateRecyclerView(RecyclerView recyclerView, TypedValue cardBackground, TypedValue textColor){
+        for(int i=0; i<recyclerView.getChildCount(); i++){
+            ViewGroup childView = (ViewGroup) recyclerView.getChildAt(i);
+            childView.setBackgroundResource(cardBackground.resourceId);
+            TextView nameTv = ButterKnife.findById(childView, R.id.tv_repositories_name);
+            TextView description = ButterKnife.findById(childView, R.id.tv_repositories_description);
+            TextView language = ButterKnife.findById(childView, R.id.tv_repositories_language);
+            TextView start = ButterKnife.findById(childView, R.id.tv_repositories_star);
+            TextView fork = ButterKnife.findById(childView, R.id.tv_repositories_fork);
+
+            int color = getResources().getColor(textColor.resourceId);
+            nameTv.setTextColor(color);
+            description.setTextColor(color);
+            language.setTextColor(color);
+            start.setTextColor(color);
+            fork.setTextColor(color);
+        }
+
+        //清空RecyclerView 缓存的Item，即清空Recycler里的mAttachedScrap(屏幕里的缓存)、
+        // mCachedViews(屏幕外的缓存)以及RecycledViewPool的缓存
+        //那么，如果是ListView，要怎么做呢？这里的思路是通过反射拿到 AbsListView 类中的 RecycleBin 对象，然后同样再用反射去调用 clear 方法
+        Class<RecyclerView> recyclerViewClass = RecyclerView.class;
+        try {
+            Field declaredField = recyclerViewClass.getDeclaredField("mRecycler");
+            declaredField.setAccessible(true);
+            Method declaredMethod = Class.forName(RecyclerView.Recycler.class.getName()).getDeclaredMethod("clear", (Class<?>[]) new Class[0]);
+            declaredMethod.setAccessible(true);
+            declaredMethod.invoke(declaredField.get(recyclerView), new Object[0]);
+            RecyclerView.RecycledViewPool recycledViewPool = recyclerView.getRecycledViewPool();
+            recycledViewPool.clear();
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
