@@ -3,7 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="?attr/controlBackground">
     <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/stl_tab_layout"
         android:layout_width="match_parent"
@@ -28,8 +29,7 @@
         app:stl_clickable="true"
         app:stl_titleOffset="24dp"
         app:stl_drawDecorationAfterTab="false"
-        app:stl_dividerThickness="0dp"
-        android:background="@android:color/white"/>
+        app:stl_dividerThickness="0dp" />
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_tab_layout"
         android:layout_width="match_parent"

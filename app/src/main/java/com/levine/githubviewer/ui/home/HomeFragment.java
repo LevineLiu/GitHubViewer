@@ -3,6 +3,7 @@ package com.levine.githubviewer.ui.home;
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;

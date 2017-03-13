@@ -23,6 +23,8 @@ import com.levine.githubviewer.ui.mine.MineFragment;
 import com.levine.githubviewer.ui.trending.TrendingFragment;
 import com.levine.githubviewer.util.FragmentSwitcher;
 
+import butterknife.BindView;
+
 public class MainActivity extends BaseAppCompatActivity {
     private final static int TAB_HOME = 0;
     private final static int TAB_TRENDING = 1;
@@ -52,6 +54,8 @@ public class MainActivity extends BaseAppCompatActivity {
 
     };
 
+    @BindView(R.id.navigation) BottomNavigationView mNavigation;
+
     @Override
     protected void getBundleExtra(Bundle extra) {
 
@@ -64,8 +68,9 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @Override
     protected void initView() {
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         if(getSupportActionBar() != null)
             getSupportActionBar().setTitle("");
         mFragmentSwitcher = new FragmentSwitcher(this, R.id.content);
@@ -94,12 +99,14 @@ public class MainActivity extends BaseAppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             setTheme(R.style.AppTheme_Dark);
             mToolbar.setBackgroundResource(R.color.colorPrimaryNightMode);
+            mNavigation.setBackgroundResource(R.color.colorBackgroundDark);
             if(Build.VERSION.SDK_INT >= 21)
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkNightMode));
         }else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             setTheme(R.style.AppTheme_Light);
             mToolbar.setBackgroundResource(R.color.colorPrimary);
+            mNavigation.setBackgroundResource(R.color.colorBackground);
             if(Build.VERSION.SDK_INT >= 21)
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
