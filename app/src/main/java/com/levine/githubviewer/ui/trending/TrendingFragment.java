@@ -83,8 +83,6 @@ public class TrendingFragment extends BaseFragment implements ICommonPagerContai
         mSmartTabLayout.setBackgroundResource(background.resourceId);
         int count = mViewPager.getChildCount();
         for(int i=0; i<count; i++){
-            TextView textView = (TextView) mSmartTabLayout.getTabAt(i);
-            textView.setTextColor(getResources().getColor(textColor.resourceId));
             ((TrendingListFragment) mAdapter.getPage(i)).setDayNightMode();
         }
     }

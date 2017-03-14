@@ -82,8 +82,6 @@ public class HomeFragment extends BaseFragment implements ICommonPagerContainerV
         mSmartTabLayout.setBackgroundResource(background.resourceId);
         int count = mViewPager.getChildCount();
         for(int i=0; i<count; i++){
-            TextView textView = (TextView) mSmartTabLayout.getTabAt(i);
-            textView.setTextColor(getResources().getColor(textColor.resourceId));
             ((RepositoriesListFragment) mAdapter.getPage(i)).setDayNightMode();
         }
 
