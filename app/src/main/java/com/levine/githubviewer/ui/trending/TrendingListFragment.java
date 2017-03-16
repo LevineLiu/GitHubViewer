@@ -1,5 +1,6 @@
 package com.levine.githubviewer.ui.trending;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import com.levine.githubviewer.entity.RepositoriesEntity;
 import com.levine.githubviewer.listener.OnListItemClickListener;
 import com.levine.githubviewer.mvp.presenter.TrendingListPresenter;
 import com.levine.githubviewer.mvp.view.ICommonView;
+import com.levine.githubviewer.ui.RepositoriesDetailActivity;
 import com.levine.githubviewer.ui.adapter.RepositoriesListAdapter;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
@@ -51,6 +53,7 @@ public class TrendingListFragment extends BaseFragment implements SwipeRefreshLa
         mRefreshLayout.setColorSchemeColors(mContext.getResources().getColor(R.color.colorPrimary));
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mAdapter = new RepositoriesListAdapter(mContext, layoutManager);
+        mAdapter.setOnListItemClickListener(this);
         mRecyclerView.addOnScrollListener(mAdapter.getOnScrollListener());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
@@ -88,7 +91,11 @@ public class TrendingListFragment extends BaseFragment implements SwipeRefreshLa
 
     @Override
     public void onItemClick(int position) {
-
+        RepositoriesEntity repositoriesEntity = mAdapter.getData().get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString(RepositoriesDetailActivity.EXTRA_REPOSITORIES_URL, repositoriesEntity.getHtml_url());
+        bundle.putString(RepositoriesDetailActivity.EXTRA_REPOSITORIES_NAME, repositoriesEntity.getFull_name());
+        navigateTo(RepositoriesDetailActivity.class, bundle);
     }
 
     @Override
