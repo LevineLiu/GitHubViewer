@@ -1,10 +1,6 @@
 package com.levine.githubviewer.ui.base;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,8 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 
@@ -143,13 +137,15 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
             else
                 getSupportActionBar().setTitle(title);
         }
-        if(mToolbar != null)
+        if(mToolbar != null){
+            mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
                 }
             });
+        }
     }
     /**
      * Retrieves the extended data from the last activity.

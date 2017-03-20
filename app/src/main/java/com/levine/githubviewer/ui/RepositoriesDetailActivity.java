@@ -1,5 +1,6 @@
 package com.levine.githubviewer.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,10 @@ public class RepositoriesDetailActivity extends BaseAppCompatActivity{
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_repositories_share:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                startActivity(intent);
                 break;
             case R.id.tv_repositories_collect:
                 break;
