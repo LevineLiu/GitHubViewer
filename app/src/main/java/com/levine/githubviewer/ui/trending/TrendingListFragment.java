@@ -94,7 +94,7 @@ public class TrendingListFragment extends BaseFragment implements SwipeRefreshLa
     @Override
     public void onSuccess(List<RepositoriesEntity> result) {
         mRefreshLayout.setRefreshing(false);
-        mAdapter.addData(result);
+        mAdapter.setData(result);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.levine.githubviewer.R;
 import com.levine.githubviewer.constant.Constants;
 import com.levine.githubviewer.constant.ParameterConstants;
+import com.levine.githubviewer.entity.RepositoriesEntity;
 import com.levine.githubviewer.entity.SearchResultEntity;
 import com.levine.githubviewer.listener.OnListItemClickListener;
 import com.levine.githubviewer.listener.OnLoadMoreListener;
@@ -16,6 +17,8 @@ import com.levine.githubviewer.mvp.view.ICommonListView;
 import com.levine.githubviewer.ui.adapter.RepositoriesListAdapter;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -107,7 +110,9 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
     @Override
     public void onRefreshSuccess(SearchResultEntity result) {
         mRefreshLayout.setRefreshing(false);
-        handleResult(result);
+        List<RepositoriesEntity> list = result.getItems();
+        mAdapter.setData(list);
+        setLoadMoreEnable(list);
     }
 
     @Override
@@ -117,7 +122,9 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
 
     @Override
     public void onLoadMoreSuccess(SearchResultEntity result) {
-        handleResult(result);
+        List<RepositoriesEntity> list = result.getItems();
+        mAdapter.addData(list);
+        setLoadMoreEnable(list);
     }
 
     @Override
@@ -125,10 +132,9 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
 
     }
 
-    private void handleResult(SearchResultEntity result){
-        mAdapter.addData(result.getItems());
-        if(result.getItems() != null && result.getItems().size() != 0){
-            if(result.getItems().size() < Constants.PAGE_SIZE)
+    private void setLoadMoreEnable(List<RepositoriesEntity> list){
+        if(list != null && list.size() != 0){
+            if(list.size() < Constants.PAGE_SIZE)
                 mAdapter.setLoadMoreEnable(false);
             else
                 mAdapter.setLoadMoreEnable(true);

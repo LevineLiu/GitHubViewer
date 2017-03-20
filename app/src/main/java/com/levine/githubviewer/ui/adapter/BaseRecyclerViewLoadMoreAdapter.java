@@ -136,12 +136,12 @@ public abstract class BaseRecyclerViewLoadMoreAdapter<T> extends RecyclerView.Ad
         notifyDataSetChanged();
     }
 
-//    public void setData(List<T> data) {
-//        if (mData == null)
-//            mData = new ArrayList<>();
-//        mData = data;
-//        notifyDataSetChanged();
-//    }
+    public void setData(List<T> data) {
+        if (mData == null)
+            mData = new ArrayList<>();
+        mData = data;
+        notifyDataSetChanged();
+    }
 
     public void remove(int position) {
         if (mData != null && position < mData.size()) {
