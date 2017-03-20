@@ -7,4 +7,9 @@
         <attr name="backgroundCardColor" format="color"/>
         <attr name="backgroundColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="WebViewBrowseView">
+        <attr name="progress_visible" format="boolean"/>
+    </declare-styleable>
+
 </resources>

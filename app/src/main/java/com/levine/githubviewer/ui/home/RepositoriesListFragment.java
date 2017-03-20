@@ -1,5 +1,6 @@
 package com.levine.githubviewer.ui.home;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.levine.githubviewer.listener.OnListItemClickListener;
 import com.levine.githubviewer.listener.OnLoadMoreListener;
 import com.levine.githubviewer.mvp.presenter.RepositoriesListPresenter;
 import com.levine.githubviewer.mvp.view.ICommonListView;
+import com.levine.githubviewer.ui.RepositoriesDetailActivity;
 import com.levine.githubviewer.ui.adapter.RepositoriesListAdapter;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
@@ -61,6 +63,7 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mAdapter = new RepositoriesListAdapter(mContext, layoutManager);
         mAdapter.setOnLoadMoreListener(this);
+        mAdapter.setOnListItemClickListener(this);
         mRecyclerView.addOnScrollListener(mAdapter.getOnScrollListener());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
@@ -104,7 +107,11 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
 
     @Override
     public void onItemClick(int position) {
-
+        RepositoriesEntity repositoriesEntity = mAdapter.getData().get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString(RepositoriesDetailActivity.EXTRA_REPOSITORIES_URL, repositoriesEntity.getHtml_url());
+        bundle.putString(RepositoriesDetailActivity.EXTRA_REPOSITORIES_NAME, repositoriesEntity.getFull_name());
+        navigateTo(RepositoriesDetailActivity.class, bundle);
     }
 
     @Override

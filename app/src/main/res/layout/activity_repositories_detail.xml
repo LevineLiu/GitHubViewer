@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:background="?attr/colorPrimary">
+        <TextView
+            android:id="@+id/tv_repositories_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:drawableLeft="@drawable/ic_menu_share"/>
+        <TextView
+            android:id="@+id/tv_repositories_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:drawableLeft="@drawable/ic_uncollected"/>
+    </android.support.v7.widget.Toolbar>
+    <com.levine.githubviewer.widget.WebViewBrowseView
+        android:id="@+id/wv_activity_repositories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
