@@ -28,15 +28,13 @@ import butterknife.ButterKnife;
  * @author Levine
  */
 
-public class TrendingFragment extends BaseFragment implements ICommonPagerContainerView{
+public class TrendingFragment extends BaseFragment<TrendingPresenter> implements ICommonPagerContainerView{
     private FragmentPagerItemAdapter mAdapter;
 
     @BindView(R.id.stl_fragment_trending)
     SmartTabLayout mSmartTabLayout;
     @BindView(R.id.vp_fragment_trending)
     ViewPager mViewPager;
-    @Inject
-    TrendingPresenter mPresenter;
 
     @Override
     protected int getLayoutId() {

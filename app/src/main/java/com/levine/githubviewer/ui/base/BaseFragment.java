@@ -24,12 +24,16 @@ import android.widget.TextView;
 
 
 import com.levine.githubviewer.R;
+import com.levine.githubviewer.mvp.presenter.BasePresenter;
+import com.levine.githubviewer.mvp.view.IBaseView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,7 +43,7 @@ import butterknife.Unbinder;
  *
  * @author LLW
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     protected String TAG;
     private boolean isFirstVisible = true;
@@ -49,6 +53,9 @@ public abstract class BaseFragment extends Fragment {
     protected Context mContext;
     private Unbinder mUnbinder;
     protected View mConvertView;
+
+    @Inject
+    protected P mPresenter;
 
     @Override
     public void onAttach(Context context) {
@@ -256,11 +263,14 @@ public abstract class BaseFragment extends Fragment {
             TextView fork = ButterKnife.findById(childView, R.id.tv_repositories_fork);
 
             int color = getResources().getColor(textColor.resourceId);
-            nameTv.setTextColor(color);
-            description.setTextColor(color);
-            language.setTextColor(color);
-            start.setTextColor(color);
-            fork.setTextColor(color);
+            if(nameTv != null){
+                nameTv.setTextColor(color);
+                description.setTextColor(color);
+                language.setTextColor(color);
+                start.setTextColor(color);
+                fork.setTextColor(color);
+            }
+
         }
 
         //清空RecyclerView 缓存的Item，即清空Recycler里的mAttachedScrap(屏幕里的缓存)、

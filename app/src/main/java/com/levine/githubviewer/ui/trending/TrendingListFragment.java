@@ -29,7 +29,7 @@ import butterknife.BindView;
  * @author Levine
  */
 
-public class TrendingListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
+public class TrendingListFragment extends BaseFragment<TrendingListPresenter> implements SwipeRefreshLayout.OnRefreshListener,
         OnListItemClickListener, ICommonView<List<RepositoriesEntity>>{
     public final static String TIME_SPAN = "time_span";
 
@@ -38,8 +38,6 @@ public class TrendingListFragment extends BaseFragment implements SwipeRefreshLa
 
     @BindView(R.id.srl_content_common_list) SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.rv_content_common_list) RecyclerView mRecyclerView;
-    @Inject
-    TrendingListPresenter mPresenter;
 
     @Override
     protected int getLayoutId() {

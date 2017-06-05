@@ -32,7 +32,7 @@ import butterknife.BindView;
  * @author Levine
  */
 
-public class RepositoriesListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
+public class RepositoriesListFragment extends BaseFragment<RepositoriesListPresenter> implements SwipeRefreshLayout.OnRefreshListener,
         OnLoadMoreListener, OnListItemClickListener, ICommonListView<SearchResultEntity>{
     public final static String EXTRA_KEYWORD = "extra_keyword";
 
@@ -42,7 +42,6 @@ public class RepositoriesListFragment extends BaseFragment implements SwipeRefre
 
     @BindView(R.id.srl_content_common_list) SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.rv_content_common_list) RecyclerView mRecyclerView;
-    @Inject RepositoriesListPresenter mPresenter;
 
     @Override
     protected int getLayoutId() {

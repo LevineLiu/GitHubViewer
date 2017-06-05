@@ -30,12 +30,11 @@ import butterknife.ButterKnife;
  * @author Levine
  */
 
-public class HomeFragment extends BaseFragment implements ICommonPagerContainerView{
+public class HomeFragment extends BaseFragment<HomePresenter> implements ICommonPagerContainerView{
     private FragmentPagerItemAdapter mAdapter;
 
     @BindView(R.id.stl_tab_layout) SmartTabLayout mSmartTabLayout;
     @BindView(R.id.vp_tab_layout) ViewPager mViewPager;
-    @Inject HomePresenter mPresenter;
 
     @Override
     protected int getLayoutId() {
