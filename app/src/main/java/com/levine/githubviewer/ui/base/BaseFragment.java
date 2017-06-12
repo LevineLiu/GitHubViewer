@@ -43,7 +43,7 @@ import butterknife.Unbinder;
  *
  * @author LLW
  */
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IBaseView{
 
     protected String TAG;
     private boolean isFirstVisible = true;
@@ -115,10 +115,13 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         if(mUnbinder != null)
             mUnbinder.unbind();
-        super.onDestroyView();
+        if(mPresenter != null)
+            mPresenter.onDestroyView();
     }
+
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -152,6 +155,15 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     protected abstract void setupComponent(BaseAppCompatActivity activity);
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
 
     protected void addFragmentWithAnimations(int containerId, Fragment fragment){
         FragmentManager fragmentManager = getFragmentManager();

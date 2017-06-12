@@ -6,5 +6,14 @@ package com.levine.githubviewer.mvp.view;
  * @author LLW
  */
 
-public interface IBaseView<T> {
+public interface IBaseView{
+    /**
+     * 显示加载
+     */
+    void showLoading();
+
+    /**
+     * 隐藏加载
+     */
+    void hideLoading();
 }

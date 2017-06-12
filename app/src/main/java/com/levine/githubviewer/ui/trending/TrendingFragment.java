@@ -2,25 +2,19 @@ package com.levine.githubviewer.ui.trending;
 
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
-import android.widget.TextView;
 
 import com.levine.githubviewer.R;
 import com.levine.githubviewer.mvp.presenter.TrendingPresenter;
 import com.levine.githubviewer.mvp.view.ICommonPagerContainerView;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
-import com.levine.githubviewer.ui.home.RepositoriesListFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created on 2017/3/10

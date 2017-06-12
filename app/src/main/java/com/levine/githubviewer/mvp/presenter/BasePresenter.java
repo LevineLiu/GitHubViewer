@@ -1,5 +1,6 @@
 package com.levine.githubviewer.mvp.presenter;
 
+import com.levine.githubviewer.mvp.interactor.BaseInteractor;
 import com.levine.githubviewer.mvp.view.IBaseView;
 
 import io.reactivex.disposables.Disposable;
@@ -9,11 +10,11 @@ import io.reactivex.disposables.Disposable;
  *
  * @author LLW
  */
-public abstract class BasePresenter<V extends IBaseView> {
+public abstract class BasePresenter<I extends BaseInteractor, V extends IBaseView> {
+    protected I mInteractor;
     protected V mView;
-    protected Disposable mDisposable;
 
-    public abstract void initialize();
+    protected void initialize(){}
 
     public void attachView(V view){
         mView = view;
@@ -21,7 +22,8 @@ public abstract class BasePresenter<V extends IBaseView> {
 
     public void onDestroyView(){
         mView = null;
-        if(mDisposable != null && !mDisposable.isDisposed())
-            mDisposable.dispose();
+        if(mInteractor != null){
+            mInteractor.onDestroy();
+        }
     }
 }

@@ -75,12 +75,6 @@ public class TrendingListFragment extends BaseFragment<TrendingListPresenter> im
         activity.getActivityComponent().inject(this);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if(mPresenter != null)
-            mPresenter.onDestroyView();
-    }
 
     @Override
     public void onRefresh() {

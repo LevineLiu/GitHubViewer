@@ -15,12 +15,11 @@ import io.reactivex.schedulers.Schedulers;
  * @author Levine
  */
 
-public class RepositoriesListInteractor {
-    private GitHubApi mApi;
+public class RepositoriesListInteractor extends BaseInteractor{
 
     @Inject
     public RepositoriesListInteractor(GitHubApi api){
-        mApi = api;
+        super(api);
     }
 
     public Observable<SearchResultEntity> createRepositoriesListObservable(String keyWord, String sort, String order, int page, int pageSize){

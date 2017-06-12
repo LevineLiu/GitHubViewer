@@ -1,6 +1,7 @@
 package com.levine.githubviewer.mvp.presenter;
 
 import com.levine.githubviewer.entity.SearchResultEntity;
+import com.levine.githubviewer.http.CustomObserver;
 import com.levine.githubviewer.mvp.interactor.RepositoriesListInteractor;
 import com.levine.githubviewer.mvp.view.ICommonListView;
 
@@ -15,8 +16,7 @@ import io.reactivex.disposables.Disposable;
  * @author Levine
  */
 
-public class RepositoriesListPresenter extends BasePresenter<ICommonListView<SearchResultEntity>>{
-    private RepositoriesListInteractor mInteractor;
+public class RepositoriesListPresenter extends BasePresenter<RepositoriesListInteractor, ICommonListView<SearchResultEntity>>{
 
     @Inject
     public RepositoriesListPresenter(RepositoriesListInteractor interactor){
@@ -30,12 +30,7 @@ public class RepositoriesListPresenter extends BasePresenter<ICommonListView<Sea
 
     public void getRepositoriesList(String keyWord, String sort, String order, final int page, int pageSize){
         mInteractor.createRepositoriesListObservable(keyWord, sort, order, page, pageSize)
-                .subscribe(new Observer<SearchResultEntity>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mDisposable = d;
-                    }
-
+                .subscribe(new CustomObserver<SearchResultEntity>() {
                     @Override
                     public void onNext(SearchResultEntity searchResultEntity) {
                         if(mView != null){
@@ -48,17 +43,13 @@ public class RepositoriesListPresenter extends BasePresenter<ICommonListView<Sea
 
                     @Override
                     public void onError(Throwable e) {
+                        super.onError(e);
                         if(mView != null){
                             if(page == 1)
                                 mView.onRefreshFailure();
                             else
                                 mView.onLoadMoreFailure();
                         }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
     }

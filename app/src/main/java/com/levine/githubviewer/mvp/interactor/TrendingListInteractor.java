@@ -18,16 +18,15 @@ import io.reactivex.schedulers.Schedulers;
  * @author Levine
  */
 
-public class TrendingListInteractor {
-    private GitHubTrendingApi mApi;
+public class TrendingListInteractor extends BaseInteractor{
 
     @Inject
     public TrendingListInteractor(GitHubTrendingApi api){
-        mApi = api;
+        super(api);
     }
 
     public Observable<List<RepositoriesEntity>> createTrendingObservable(String language, String since){
-        return mApi.getTrendingRepositories(language, since)
+        return mTrendingApi.getTrendingRepositories(language, since)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
     }

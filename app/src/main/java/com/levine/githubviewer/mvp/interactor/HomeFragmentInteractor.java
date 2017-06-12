@@ -15,11 +15,12 @@ import javax.inject.Inject;
  * @author Levine
  */
 
-public class HomeFragmentInteractor {
+public class HomeFragmentInteractor extends BaseInteractor{
     private Context mContext;
 
     @Inject
     public HomeFragmentInteractor(Context context){
+        super();
         mContext = context;
     }
 

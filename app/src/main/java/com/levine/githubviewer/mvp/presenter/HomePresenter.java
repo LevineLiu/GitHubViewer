@@ -11,8 +11,7 @@ import javax.inject.Inject;
  * @author Levine
  */
 
-public class HomePresenter extends BasePresenter<ICommonPagerContainerView> {
-    private HomeFragmentInteractor mInteractor;
+public class HomePresenter extends BasePresenter<HomeFragmentInteractor, ICommonPagerContainerView> {
 
     @Inject
     public HomePresenter(HomeFragmentInteractor interactor){

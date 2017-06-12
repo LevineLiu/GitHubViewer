@@ -16,11 +16,12 @@ import javax.inject.Inject;
  * @author Levine
  */
 
-public class TrendingInteractor {
+public class TrendingInteractor extends BaseInteractor{
     private Context mContext;
 
     @Inject
     public TrendingInteractor(Context context){
+        super();
         mContext = context;
     }
 

@@ -11,8 +11,7 @@ import javax.inject.Inject;
  * @author Levine
  */
 
-public class TrendingPresenter extends BasePresenter<ICommonPagerContainerView>{
-    private TrendingInteractor mInteractor;
+public class TrendingPresenter extends BasePresenter<TrendingInteractor, ICommonPagerContainerView>{
 
     @Inject
     public TrendingPresenter(TrendingInteractor interactor){

@@ -82,12 +82,6 @@ public class RepositoriesListFragment extends BaseFragment<RepositoriesListPrese
         }, Constants.DELAY_TIME);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if(mPresenter != null)
-            mPresenter.onDestroyView();
-    }
 
     @Override
     public void onRefresh() {

@@ -1,6 +1,7 @@
 package com.levine.githubviewer.mvp.presenter;
 
 import com.levine.githubviewer.entity.RepositoriesEntity;
+import com.levine.githubviewer.http.CustomObserver;
 import com.levine.githubviewer.mvp.interactor.TrendingListInteractor;
 import com.levine.githubviewer.mvp.view.ICommonView;
 
@@ -17,8 +18,7 @@ import io.reactivex.disposables.Disposable;
  * @author Levine
  */
 
-public class TrendingListPresenter extends BasePresenter<ICommonView<List<RepositoriesEntity>>>{
-    private TrendingListInteractor mInteractor;
+public class TrendingListPresenter extends BasePresenter<TrendingListInteractor, ICommonView<List<RepositoriesEntity>>>{
 
     @Inject
     public TrendingListPresenter(TrendingListInteractor interactor){
@@ -32,12 +32,7 @@ public class TrendingListPresenter extends BasePresenter<ICommonView<List<Reposi
 
     public void getTrendingRepositories(String language, String since){
         mInteractor.createTrendingObservable(language, since)
-                .subscribe(new Observer<List<RepositoriesEntity>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mDisposable = d;
-                    }
-
+                .subscribe(new CustomObserver<List<RepositoriesEntity>>() {
                     @Override
                     public void onNext(List<RepositoriesEntity> resultEntity) {
                         if(mView != null)
@@ -46,13 +41,9 @@ public class TrendingListPresenter extends BasePresenter<ICommonView<List<Reposi
 
                     @Override
                     public void onError(Throwable e) {
+                        super.onError(e);
                         if(mView != null)
                             mView.onFailure();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
     }

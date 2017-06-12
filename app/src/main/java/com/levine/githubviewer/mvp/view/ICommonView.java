@@ -7,7 +7,7 @@ package com.levine.githubviewer.mvp.view;
  * @author LLW
  */
 
-public interface ICommonView<T> extends IBaseView<T>{
+public interface ICommonView<T> extends IBaseView{
     void onSuccess(T result);
     void onFailure();
 }
