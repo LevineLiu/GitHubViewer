@@ -1,14 +1,14 @@
 package com.levine.githubviewer.mvp.presenter;
 
+import com.levine.githubviewer.entity.RepositoriesEntity;
 import com.levine.githubviewer.entity.SearchResultEntity;
 import com.levine.githubviewer.http.CustomObserver;
 import com.levine.githubviewer.mvp.interactor.RepositoriesListInteractor;
-import com.levine.githubviewer.mvp.view.ICommonListView;
+import com.levine.githubviewer.mvp.view.IRepositoriesListView;
+
+import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created on 2017/3/10
@@ -16,7 +16,8 @@ import io.reactivex.disposables.Disposable;
  * @author Levine
  */
 
-public class RepositoriesListPresenter extends BasePresenter<RepositoriesListInteractor, ICommonListView<SearchResultEntity>>{
+public class RepositoriesListPresenter extends BaseRecyclePresenter<RepositoriesListInteractor,
+        IRepositoriesListView<List<RepositoriesEntity>>>{
 
     @Inject
     public RepositoriesListPresenter(RepositoriesListInteractor interactor){
@@ -28,16 +29,18 @@ public class RepositoriesListPresenter extends BasePresenter<RepositoriesListInt
 
     }
 
-    public void getRepositoriesList(String keyWord, String sort, String order, final int page, int pageSize){
-        mInteractor.createRepositoriesListObservable(keyWord, sort, order, page, pageSize)
+    @Override
+    public void getData(final int page, int pageSize) {
+        mInteractor.createRepositoriesListObservable(mView.getKeyword(), mView.getSort(), mView.getOrder(), page,
+                pageSize)
                 .subscribe(new CustomObserver<SearchResultEntity>() {
                     @Override
                     public void onNext(SearchResultEntity searchResultEntity) {
                         if(mView != null){
                             if(page == 1)
-                                mView.onRefreshSuccess(searchResultEntity);
+                                mView.onRefreshSuccess(searchResultEntity.getItems());
                             else
-                                mView.onLoadMoreSuccess(searchResultEntity);
+                                mView.onLoadMoreSuccess(searchResultEntity.getItems());
                         }
                     }
 
@@ -53,4 +56,10 @@ public class RepositoriesListPresenter extends BasePresenter<RepositoriesListInt
                     }
                 });
     }
+
+    @Override
+    public boolean isAutoLoadData() {
+        return false;
+    }
+
 }

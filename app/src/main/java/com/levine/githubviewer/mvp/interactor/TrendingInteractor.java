@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.levine.githubviewer.R;
-import com.levine.githubviewer.api.GitHubTrendingApi;
+import com.levine.githubviewer.constant.Constants;
 import com.levine.githubviewer.ui.trending.TrendingListFragment;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
@@ -32,7 +32,7 @@ public class TrendingInteractor extends BaseInteractor{
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(mContext);
         for (int i=0; i<count; i++){
             Bundle bundle = new Bundle();
-            bundle.putString(TrendingListFragment.TIME_SPAN, title[i]);
+            bundle.putInt(Constants.EXTRA_CONTENT, i);
             creator.add(title[i], TrendingListFragment.class, bundle);
         }
         return creator.create();

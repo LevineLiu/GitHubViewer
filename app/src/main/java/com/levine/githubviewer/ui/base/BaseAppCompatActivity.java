@@ -20,8 +20,11 @@ import com.levine.githubviewer.injector.component.ActivityComponent;
 import com.levine.githubviewer.injector.component.DaggerActivityComponent;
 import com.levine.githubviewer.injector.module.ActivityModule;
 import com.levine.githubviewer.listener.NetStateListener;
+import com.levine.githubviewer.mvp.presenter.BasePresenter;
 
 import java.lang.ref.WeakReference;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -34,7 +37,7 @@ import butterknife.ButterKnife;
 
 
 
-public abstract class BaseAppCompatActivity extends AppCompatActivity implements NetStateListener {
+public abstract class BaseAppCompatActivity<P extends BasePresenter> extends AppCompatActivity implements NetStateListener {
     protected String TAG;
     protected int mScreenWidth;
     protected int mScreenHeight;
@@ -43,6 +46,9 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     private Toast mToast;//防止上一个toast还没结束时弹出新的toast，这里只使用一个toast
     private boolean mIsShortDuration;
     public Toolbar mToolbar;
+
+    @Inject
+    protected P mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
                 .appComponent(((GitHubViewerApplication) getApplication()).getAppComponent())
                 .activityModule(new ActivityModule(this))
                 .build();
+        setupComponent(mComponent);
 
         initView();
 
@@ -122,6 +129,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     public ActivityComponent getActivityComponent(){
         return mComponent;
     }
+
+    protected abstract void setupComponent(ActivityComponent component);
 
     protected void onNetworkConnected(){}
 

@@ -5,8 +5,8 @@
         <item>iOS</item>
     </array>
     <array name="trending_array">
-        <item>每日</item>
-        <item>每周</item>
-        <item>每月</item>
+        <item>daily</item>
+        <item>weekly</item>
+        <item>monthly</item>
     </array>
 </resources>

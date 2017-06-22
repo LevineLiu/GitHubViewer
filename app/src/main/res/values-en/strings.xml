@@ -10,6 +10,7 @@
     <string name="my_favorite">My favorite</string>
     <string name="night_mode">Night mode</string>
 
+    <string name="loading">Loading...</string>
     <string name="data_load_failed">Data load failed!</string>
 
     <!-- Strings related to login -->

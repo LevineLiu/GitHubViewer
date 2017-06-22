@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.levine.githubviewer.GitHubViewerApplication;
 import com.levine.githubviewer.R;
 import com.levine.githubviewer.constant.SharedPreferenceConstant;
+import com.levine.githubviewer.injector.component.ActivityComponent;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
 import com.levine.githubviewer.ui.home.HomeFragment;
@@ -77,6 +78,11 @@ public class MainActivity extends BaseAppCompatActivity {
         mFragmentSwitcher.addFragment(TAB_MINE, new MineFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
         mFragmentSwitcher.addFragment(TAB_TRENDING, new TrendingFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
         mFragmentSwitcher.addFragment(TAB_HOME, new HomeFragment(), FragmentSwitcher.OPERATION_SHOW_HIDE);
+    }
+
+    @Override
+    protected void setupComponent(ActivityComponent component) {
+
     }
 
     @Override

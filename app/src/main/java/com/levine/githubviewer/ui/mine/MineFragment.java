@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created on 2017/3/9
@@ -27,6 +29,16 @@ public class MineFragment extends BaseFragment{
     @BindView(R.id.tv_my_favorite) TextView mMyFavoriteTv;
     @BindView(R.id.tv_night_mode) TextView mNightModeTv;
     @BindView(R.id.switch_night_mode) Switch mNightModeSwitch;
+
+    @OnClick({R.id.tv_my_favorite})
+    public void onClick(View view){
+        int id = view.getId();
+        switch (id){
+            case R.id.tv_my_favorite:
+                navigateTo(MyFavoriteRepositoriesActivity.class);
+                break;
+        }
+    }
 
     @Override
     protected int getLayoutId() {

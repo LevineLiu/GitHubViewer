@@ -29,18 +29,17 @@
         <activity
             android:name=".ui.mine.LoginActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"/>
         <activity
             android:name=".ui.mine.SettingsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/title_activity_settings">
-        </activity>
+            android:label="@string/title_activity_settings"/>
         <activity
             android:name=".ui.RepositoriesDetailActivity"
-            android:configChanges="keyboardHidden|screenSize|orientation"
-            android:label="@string/title_activity_settings">
-        </activity>
+            android:configChanges="keyboardHidden|screenSize|orientation"/>
+        <activity
+            android:name=".ui.mine.MyFavoriteRepositoriesActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"/>
     </application>
 
 </manifest>

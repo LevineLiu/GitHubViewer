@@ -10,6 +10,12 @@
 
     <declare-styleable name="WebViewBrowseView">
         <attr name="progress_visible" format="boolean"/>
+        <attr name="webview_client_enabled" format="boolean"/>
+        <attr name="webview_background" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="BaseViewId">
+        <attr name="toolBar" format="integer"/>
     </declare-styleable>
 
 </resources>

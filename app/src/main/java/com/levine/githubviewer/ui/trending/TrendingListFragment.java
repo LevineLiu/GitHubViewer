@@ -12,14 +12,15 @@ import com.levine.githubviewer.entity.RepositoriesEntity;
 import com.levine.githubviewer.listener.OnListItemClickListener;
 import com.levine.githubviewer.mvp.presenter.TrendingListPresenter;
 import com.levine.githubviewer.mvp.view.ICommonView;
+import com.levine.githubviewer.mvp.view.ITrendingListView;
 import com.levine.githubviewer.ui.RepositoriesDetailActivity;
 import com.levine.githubviewer.ui.adapter.RepositoriesListAdapter;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.ui.base.BaseFragment;
+import com.levine.githubviewer.ui.base.BaseRecycleViewActivity;
+import com.levine.githubviewer.ui.base.BaseRecycleViewFragment;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -29,34 +30,15 @@ import butterknife.BindView;
  * @author Levine
  */
 
-public class TrendingListFragment extends BaseFragment<TrendingListPresenter> implements SwipeRefreshLayout.OnRefreshListener,
-        OnListItemClickListener, ICommonView<List<RepositoriesEntity>>{
-    public final static String TIME_SPAN = "time_span";
+public class TrendingListFragment extends BaseRecycleViewFragment<RepositoriesEntity, TrendingListPresenter,
+        RepositoriesListAdapter> implements ITrendingListView<List<RepositoriesEntity>>{
 
-    private RepositoriesListAdapter mAdapter;
-    private String mTimeSpan;
-
-    @BindView(R.id.srl_content_common_list) SwipeRefreshLayout mRefreshLayout;
-    @BindView(R.id.rv_content_common_list) RecyclerView mRecyclerView;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.swipe_refresh_layout;
-    }
+    private int mPosition;
 
     @Override
     protected void initView() {
-        mTimeSpan = getArguments().getString(TIME_SPAN);
-        mRefreshLayout.setOnRefreshListener(this);
-        mRefreshLayout.setColorSchemeColors(mContext.getResources().getColor(R.color.colorPrimary));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        mAdapter = new RepositoriesListAdapter(mContext, layoutManager);
-        mAdapter.setOnListItemClickListener(this);
-        mRecyclerView.addOnScrollListener(mAdapter.getOnScrollListener());
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
-        mRecyclerView.setAdapter(mAdapter);
-        mPresenter.attachView(this);
+        super.initView();
+        mPosition = getArguments().getInt(Constants.EXTRA_CONTENT);
     }
 
     @Override
@@ -65,7 +47,7 @@ public class TrendingListFragment extends BaseFragment<TrendingListPresenter> im
             @Override
             public void run() {
                 mRefreshLayout.setRefreshing(true);
-                mPresenter.getTrendingRepositories("", mTimeSpan);
+                mPresenter.getData(0, Constants.PAGE_SIZE);
             }
         }, Constants.DELAY_TIME);
     }
@@ -76,28 +58,34 @@ public class TrendingListFragment extends BaseFragment<TrendingListPresenter> im
     }
 
 
-    @Override
-    public void onRefresh() {
-        mPresenter.getTrendingRepositories("", mTimeSpan);
-    }
 
     @Override
     public void onItemClick(int position) {
         RepositoriesEntity repositoriesEntity = mAdapter.getData().get(position);
         Bundle bundle = new Bundle();
-        bundle.putString(RepositoriesDetailActivity.EXTRA_REPOSITORIES_URL, repositoriesEntity.getHtml_url());
-        bundle.putString(RepositoriesDetailActivity.EXTRA_REPOSITORIES_NAME, repositoriesEntity.getFull_name());
+        bundle.putParcelable(Constants.EXTRA_CONTENT, repositoriesEntity);
         navigateTo(RepositoriesDetailActivity.class, bundle);
     }
 
     @Override
-    public void onSuccess(List<RepositoriesEntity> result) {
-        mRefreshLayout.setRefreshing(false);
-        mAdapter.setData(result);
+    protected void initAdapter(RecyclerView.LayoutManager layoutManager) {
+        mAdapter = new RepositoriesListAdapter(mContext, layoutManager);
     }
 
     @Override
-    public void onFailure() {
-        mRefreshLayout.setRefreshing(false);
+    public int getPosition() {
+        return mPosition;
+    }
+
+    @Override
+    public void onRefreshSuccess(List<RepositoriesEntity> result) {
+        super.onRefreshSuccess(result);
+        mAdapter.setLoadMoreEnable(false);
+    }
+
+    @Override
+    public void onRefreshFailure() {
+        super.onRefreshFailure();
+        mAdapter.setLoadMoreEnable(false);
     }
 }

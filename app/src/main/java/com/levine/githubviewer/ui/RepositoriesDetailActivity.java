@@ -4,8 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.levine.githubviewer.R;
+import com.levine.githubviewer.constant.Constants;
+import com.levine.githubviewer.db.DbManager;
+import com.levine.githubviewer.entity.RepositoriesEntity;
+import com.levine.githubviewer.injector.component.ActivityComponent;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
 import com.levine.githubviewer.widget.WebViewBrowseView;
 
@@ -19,11 +24,10 @@ import butterknife.OnClick;
  */
 
 public class RepositoriesDetailActivity extends BaseAppCompatActivity{
-    public final static String EXTRA_REPOSITORIES_NAME = "extra_repositories_name";
-    public final static String EXTRA_REPOSITORIES_URL = "extra_repositories_url";
-    private String mUrl;
-    private String mTitle;
+    private RepositoriesEntity mRepositories;
+    private DbManager mDbManager;
 
+    @BindView(R.id.tv_repositories_collect) TextView mCollectTv;
     @BindView(R.id.wv_activity_repositories) WebViewBrowseView mWebView;
     @OnClick({R.id.tv_repositories_share, R.id.tv_repositories_collect})
     public void onClick(View view){
@@ -35,14 +39,24 @@ public class RepositoriesDetailActivity extends BaseAppCompatActivity{
                 startActivity(intent);
                 break;
             case R.id.tv_repositories_collect:
+                if(mDbManager.isRepositoriesCollected(mRepositories.getId())){
+                    if(mDbManager.deleteFavoriteRepositories(mRepositories.getId())){
+                        mCollectTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable
+                                .ic_uncollected, 0, 0, 0);
+                    }
+                }else{
+                    if(mDbManager.insertFavoriteRepositories(mRepositories)){
+                        mCollectTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable
+                                .ic_collected, 0, 0, 0);
+                    }
+                }
                 break;
         }
     }
 
     @Override
     protected void getBundleExtra(Bundle extra) {
-        mUrl = extra.getString(EXTRA_REPOSITORIES_URL);
-        mTitle = extra.getString(EXTRA_REPOSITORIES_NAME);
+        mRepositories = extra.getParcelable(Constants.EXTRA_CONTENT);
     }
 
     @Override
@@ -51,9 +65,21 @@ public class RepositoriesDetailActivity extends BaseAppCompatActivity{
     }
 
     @Override
+    protected void setupComponent(ActivityComponent component) {
+
+    }
+
+    @Override
     protected void initView() {
-        setDisplayHomeAsUp(mTitle);
-        mWebView.loadUrl(mUrl);
+        if(mRepositories == null)
+            return;
+        setDisplayHomeAsUp(mRepositories.getFull_name());
+        mWebView.loadUrl(mRepositories.getHtml_url());
+        mDbManager = new DbManager(this);
+        if(mDbManager.isRepositoriesCollected(mRepositories.getId())){
+            mCollectTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable
+                    .ic_collected, 0, 0, 0);
+        }
     }
 
     @Override
@@ -63,12 +89,13 @@ public class RepositoriesDetailActivity extends BaseAppCompatActivity{
             mWebView.release();
     }
 
+
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(event.getAction() == KeyEvent.KEYCODE_BACK){
+    public void onBackPressed() {
+        if(mWebView.canGoBack()){
             mWebView.goBack();
-            return true;
+        }else{
+            finish();
         }
-        else return super.onKeyDown(keyCode, event);
     }
 }

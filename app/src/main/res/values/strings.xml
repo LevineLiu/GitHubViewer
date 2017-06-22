@@ -9,7 +9,8 @@
 
     <string name="my_favorite">我的收藏</string>
     <string name="night_mode">夜间模式</string>
-    
+
+    <string name="loading">加载中...</string>
     <string name="data_load_failed">数据加载失败!</string>
 
     <!-- Strings related to login -->

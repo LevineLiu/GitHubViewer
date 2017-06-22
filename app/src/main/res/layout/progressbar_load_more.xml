@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/small_text"
         android:layout_marginLeft="10dp"
-        android:text="加载中..."/>
+        android:text="@string/loading"/>
 
 </LinearLayout>

@@ -1,12 +1,15 @@
 package com.levine.githubviewer.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created on 2017/3/9
  *
  * @author Levine
  */
 
-public class OwnerEntity {
+public class OwnerEntity implements Parcelable{
     /**
      * login : davidbrenner
      * id : 236870
@@ -180,4 +183,65 @@ public class OwnerEntity {
     public void setSite_admin(boolean site_admin) {
         this.site_admin = site_admin;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.login);
+        dest.writeInt(this.id);
+        dest.writeString(this.avatar_url);
+        dest.writeString(this.gravatar_id);
+        dest.writeString(this.url);
+        dest.writeString(this.html_url);
+        dest.writeString(this.followers_url);
+        dest.writeString(this.following_url);
+        dest.writeString(this.gists_url);
+        dest.writeString(this.starred_url);
+        dest.writeString(this.subscriptions_url);
+        dest.writeString(this.organizations_url);
+        dest.writeString(this.repos_url);
+        dest.writeString(this.events_url);
+        dest.writeString(this.received_events_url);
+        dest.writeString(this.type);
+        dest.writeByte(this.site_admin ? (byte) 1 : (byte) 0);
+    }
+
+    public OwnerEntity() {
+    }
+
+    protected OwnerEntity(Parcel in) {
+        this.login = in.readString();
+        this.id = in.readInt();
+        this.avatar_url = in.readString();
+        this.gravatar_id = in.readString();
+        this.url = in.readString();
+        this.html_url = in.readString();
+        this.followers_url = in.readString();
+        this.following_url = in.readString();
+        this.gists_url = in.readString();
+        this.starred_url = in.readString();
+        this.subscriptions_url = in.readString();
+        this.organizations_url = in.readString();
+        this.repos_url = in.readString();
+        this.events_url = in.readString();
+        this.received_events_url = in.readString();
+        this.type = in.readString();
+        this.site_admin = in.readByte() != 0;
+    }
+
+    public static final Creator<OwnerEntity> CREATOR = new Creator<OwnerEntity>() {
+        @Override
+        public OwnerEntity createFromParcel(Parcel source) {
+            return new OwnerEntity(source);
+        }
+
+        @Override
+        public OwnerEntity[] newArray(int size) {
+            return new OwnerEntity[size];
+        }
+    };
 }
