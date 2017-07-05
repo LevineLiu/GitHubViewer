@@ -13,6 +13,9 @@
     <string name="loading">加载中...</string>
     <string name="data_load_failed">数据加载失败!</string>
 
+    <string name="search_hint">搜索开源项目</string>
+    <string name="please_input_search_content">请输入搜索内容</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".GitHubViewerApplication">
+
+        <provider
+            android:authorities="com.levine.githubviewer.SearchSuggestionProvider"
+            android:name=".provider.SearchSuggestionProvider"/>
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -40,6 +44,16 @@
         <activity
             android:name=".ui.mine.MyFavoriteRepositoriesActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"/>
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import com.levine.githubviewer.ui.MainActivity;
 import com.levine.githubviewer.ui.home.RepositoriesListFragment;
 import com.levine.githubviewer.ui.home.HomeFragment;
 import com.levine.githubviewer.ui.mine.MyFavoriteRepositoriesActivity;
+import com.levine.githubviewer.ui.search.SearchActivity;
 import com.levine.githubviewer.ui.trending.TrendingFragment;
 import com.levine.githubviewer.ui.trending.TrendingListFragment;
 
@@ -27,4 +28,5 @@ public interface ActivityComponent {
     void inject(TrendingListFragment fragment);
     void inject(TrendingFragment fragment);
     void inject(MyFavoriteRepositoriesActivity activity);
+    void inject(SearchActivity activity);
 }

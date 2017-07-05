@@ -6,21 +6,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.levine.githubviewer.GitHubViewerApplication;
 import com.levine.githubviewer.R;
 import com.levine.githubviewer.constant.SharedPreferenceConstant;
 import com.levine.githubviewer.injector.component.ActivityComponent;
 import com.levine.githubviewer.ui.base.BaseAppCompatActivity;
-import com.levine.githubviewer.ui.base.BaseFragment;
 import com.levine.githubviewer.ui.home.HomeFragment;
 import com.levine.githubviewer.ui.mine.MineFragment;
+import com.levine.githubviewer.ui.search.SearchActivity;
 import com.levine.githubviewer.ui.trending.TrendingFragment;
 import com.levine.githubviewer.util.FragmentSwitcher;
 
@@ -93,6 +91,11 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.main_search:
+                navigateTo(SearchActivity.class);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
